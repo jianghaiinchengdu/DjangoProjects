@@ -7,6 +7,7 @@ from django.shortcuts import render_to_response
 from newApp.models import Author
 import sqlite3
 import datetime
+import WSG
 
 
 class Person(object):
@@ -20,7 +21,7 @@ class Person(object):
 
 def hello(request):
     res = []
-
+    a = WSG
     return HttpResponse(Author.objects.all()[0].email)
     # person = Person('jiangha111', i)
     # res.append(person)
@@ -31,7 +32,7 @@ def hello(request):
     # for j in range(0, 10):
     #     cursor.execute("INSERT INTO Person VALUES ('jianghai%d',%d,'sss')" % (j,j))
     #     res.append(cursor.fetchall())
-    cursor.execute("SELECT * FROM Person")
+    cursor.execute("DROP TABLE newApp_testmodel")
     des = cursor.fetchall()
     print(des)
 
