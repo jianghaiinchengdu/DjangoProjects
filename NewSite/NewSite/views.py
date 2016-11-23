@@ -1,7 +1,10 @@
 #!/usr/bin/env python
+# encoding utf-8
+
 from django.http import HttpResponse
 from django.template import *
 from django.shortcuts import render_to_response
+from newApp.models import Author
 import sqlite3
 import datetime
 
@@ -17,13 +20,22 @@ class Person(object):
 
 def hello(request):
     res = []
-    for i in range(1, 20):
-        person = Person('jiangha111', i)
-        res.append(person)
-        a = sqlite3.connect('../db.sqlite3')
-        # a.execute('CREATE TABLE Persons(Id_P int,LastName varchar(255),FirstName varchar(255),Address varchar(255),City varchar(255))')
-        # print(a)
-        a.execute("INSERT INTO Persons('sss','jianghai','sss','asdfsdf','ssssssss')")
+
+    return HttpResponse(Author.objects.all()[0].email)
+    # person = Person('jiangha111', i)
+    # res.append(person)
+    a = sqlite3.connect('../db.sqlite3')
+    cursor = a.cursor()
+    # cursor.execute("CREATE TABLE Person (name text,age integer,address text)")
+
+    # for j in range(0, 10):
+    #     cursor.execute("INSERT INTO Person VALUES ('jianghai%d',%d,'sss')" % (j,j))
+    #     res.append(cursor.fetchall())
+    cursor.execute("SELECT * FROM Person")
+    des = cursor.fetchall()
+    print(des)
+
+    a.close()
     return render_to_response('HomePage.html', {'personList': res})
 
 
