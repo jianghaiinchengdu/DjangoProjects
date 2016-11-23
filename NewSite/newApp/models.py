@@ -24,9 +24,6 @@ class Author(models.Model):
         # 在Python3中使用 def __str__(self)
         return self.first_name
 
-    class Meta:
-        filter = ['name' = 'yejing']
-
 
 class Book(models.Model):
     title = models.CharField(max_length=100)
